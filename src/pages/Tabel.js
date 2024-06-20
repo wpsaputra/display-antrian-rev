@@ -7,6 +7,7 @@ import "../custom.css"
 // reorder
 function Table() {
     const [cryptoData, setCryptoData] = useState([]);
+    const [petugasPST, setPetugasPST] = useState([]);
     const [tesSuara, setTesSuara] = useState(true);
     let yourDate = new Date();
     let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
@@ -20,6 +21,7 @@ function Table() {
     useEffect(() => {
         const interval = setInterval(() => {
             fetchCryptoData();
+            fetchPetugasPST();
             console.log('Table Updated');
             
             // console.log(window.SpeechSynthesisUtterance);
@@ -38,6 +40,20 @@ function Table() {
         }, 5000)
         return () => clearInterval(interval);
     }, [cryptoData])
+
+    const fetchPetugasPST = async () => {
+        const d = new Date();
+        let sesi = d.getHours()>12? 2:1;
+
+        const data2 = await fetch(url_api_view + `/records/jadwal_piket_view?filter=sesi,eq,${sesi}&filter=tanggal,eq,${d.toISOString().slice(0, 10)}&order=date_created,desc`);
+        const apiResponse2 = await data2.json();
+        const sortedData2 = apiResponse2.records[0];
+
+        console.log("apiResponse2", apiResponse2);
+        console.log("sortedData2", sortedData2);
+        setPetugasPST(apiResponse2.records);
+
+    }
 
     const fetchCryptoData = async () => {
         const data = await fetch(url_api_view + `/records/queue?order=waktu_panggilan,desc&order=id_status&filter=waktu_kunjungan,sw,${date}`);
@@ -88,7 +104,22 @@ function Table() {
 
     async function textToSpeach(message) {
         const speach = new SpeechSynthesisUtterance(message);
-        speach.voice = await speechSynthesis.getVoices()[11];
+        // speach.lang = "id-ID";
+        // speach.voices = await speechSynthesis.getVoices();
+        
+        var voices = await speechSynthesis.getVoices();
+        // console.log("voices", voices);
+        // var indonesianVoice = voices.find(voice => voice.lang === 'id-ID');
+
+        // // If the Indonesian female voice is found, set it
+        // if (indonesianVoice) {
+        //     speach.voice = indonesianVoice;
+        // } else {
+        //     alert('Female Indonesian voice not found. Using default voice.');
+        // }
+
+        // speach.voice = await speechSynthesis.getVoices()[11];
+        speach.lang = "id-ID";
         speechSynthesis.speak(speach);
     }
 
@@ -123,6 +154,14 @@ function Table() {
                 <div>
                     <h2 className="text-3xl text-blue font-bold leading-tight mb-1">Daftar Antrean PST BPS Provinsi Sulawesi Tenggara</h2>
                     <div className="flex text-lg rounded-xl text-gray-600 mb-3"><h2 className="text-2xl font-semibold leading-tight">🗓️ {yourDate.toLocaleDateString("id-ID", options)}</h2></div>
+                    {petugasPST.length > 0 &&
+                        <div style={{display: "flex", justifyContent:"space-between", fontSize: "larger", marginTop: "30px"}}>
+                            <p>Petugas 1: {petugasPST[0].petugas1_nama}</p>
+                            <p>Petugas 2: {petugasPST[0].petugas2_nama}</p>
+                            <p>Petugas 3: {petugasPST[0].petugas3_nama}</p>
+                            <p>Petugas 4: {petugasPST[0].petugas4_nama}</p>
+                        </div>
+                    }
                 </div>
                 <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
                     <div
