@@ -17,9 +17,7 @@ export default function Survey() {
     const [p5, setP5] = useState(0);
     const [p6, setP6] = useState(0);
     const [p7, setP7] = useState(0);
-    const [p8, setP8] = useState(0);
-    const [p9, setP9] = useState(0);
-    const [p10, setP10] = useState(0);
+    
     const [saran, setSaran] = useState("");
     const [id_pengunjung, setid_pengunjung] = useState(0);
     const [niplama_petugas, setNiplamaPetugas] = useState(0);
@@ -145,7 +143,7 @@ export default function Survey() {
     }
 
     const isSaranError = () =>{
-        if ((p1 < 6 || p2 < 6 || p3 < 6 || p4 < 6 || p5 < 6 || p6 < 6 || p7 < 6 || p8 < 6 || p9 < 6 || p10 < 6) && saran=="" ) 
+        if ((p1 < 6 || p2 < 6 || p3 < 6 || p4 < 6 || p5 < 6 || p6 < 6 || p7 < 6 ) && saran=="" ) 
         {
             return true;
         }
@@ -154,7 +152,7 @@ export default function Survey() {
     }
 
     const isGetReward = () =>{
-        if (p1 < 4 || p2 < 4 || p3 < 4 || p4 < 4 || p5 < 4 || p4 < 4 || p7 < 4 || p8 < 4 || p9 < 4 || p10 < 4 ) 
+        if (p1 < 4 || p2 < 4 || p3 < 4 || p4 < 4 || p5 < 4 || p4 < 4 || p7 < 4  ) 
         {
             return true;
         }
@@ -169,7 +167,7 @@ export default function Survey() {
         e.preventDefault();
         console.log("handle submit");
         setShowErrorMessage(true);
-        if (p1 > 0 && p2 > 0 && p3 > 0 && p4 > 0 && p5 > 0 && p6 > 0 && p7 > 0 && p8 > 0 && p9 > 0 && p10 > 0 
+        if (p1 > 0 && p2 > 0 && p3 > 0 && p4 > 0 && p5 > 0 && p6 > 0 && p7 > 0  
             && id_pengunjung > 0 && niplama_petugas > 0 && !isSaranError()) 
         {
             setIsLoading(true);
@@ -181,9 +179,7 @@ export default function Survey() {
                 p5: p5,
                 p6: p6,
                 p7: p7,
-                p8: p8,
-                p9: p9,
-                p10: p10,
+                
                 saran: refSaran.current.value,
                 id_pengunjung: id_pengunjung,
                 niplama_petugas: niplama_petugas
@@ -227,7 +223,7 @@ export default function Survey() {
                     <div className="mx-auto">
                         {/* Headline */}
                         <div className="font-sans text-gray-700 space-y-2 sm:leading-7 text-center antialiased">
-                            <h1 id="title" className="text-3xl font-semibold">Survey Kepuasan Pelayanan</h1>
+                            <h1 id="title" className="text-3xl font-semibold">Survey Kepuasan Petugas Pelayanan</h1>
                             <p id="description" className="text-lg">BPS Provinsi Sulawesi Tenggara</p>
                             <Rating style={{display: "none"}} />
                             
@@ -272,7 +268,7 @@ export default function Survey() {
 
                                 <div className="col-span-6 sm:col-span-6">
                                     <label id="email-label" htmlFor="email" className="block text-sm font-medium text-gray-600">
-                                        Persyaratan pelayanan mudah
+                                    Petugas pelayanan merespon dengan baik
                                     </label>
                                     {/* <Smiley setValue={setP1} /> */}
                                     <Rating
@@ -291,7 +287,7 @@ export default function Survey() {
                                 </div>
                                 <div className="col-span-6 sm:col-span-6">
                                     <label id="email-label" htmlFor="email" className="block text-sm font-medium text-gray-600">
-                                        Prosedur/alur pelayanan mudah
+                                         Kerapihan Petugas Pelayanan
                                     </label>
                                     {/* <Smiley setValue={setP2} /> */}
                                     <Rating
@@ -306,7 +302,7 @@ export default function Survey() {
                                 </div>
                                 <div className="col-span-6 sm:col-span-6">
                                     <label id="email-label" htmlFor="email" className="block text-sm font-medium text-gray-600">
-                                        Jangka waktu pelayanan yang diterima sesuai dengan yang ditetapkan
+                                        Petugas Pelayanan Menerapkan Budaya Senyum
                                     </label>
                                     {/* <Smiley setValue={setP3} /> */}
                                     <Rating
@@ -321,7 +317,7 @@ export default function Survey() {
                                 </div>
                                 <div className="col-span-6 sm:col-span-6">
                                     <label id="email-label" htmlFor="email" className="block text-sm font-medium text-gray-600">
-                                        Biaya pelayanan sesuai yang ditetapkan
+                                    Petugas Pelayanan Menerapkan Budaya Sapa
                                     </label>
                                     {/* <Smiley setValue={setP4} /> */}
                                     <Rating
@@ -336,7 +332,7 @@ export default function Survey() {
                                 </div>
                                 <div className="col-span-6 sm:col-span-6">
                                     <label id="email-label" htmlFor="email" className="block text-sm font-medium text-gray-600">
-                                        Produk pelayanan yang diterima sesuai yang dijanjikan
+                                    Petugas Pelayanan Menerapkan Budaya Salam
                                     </label>
                                     {/* <Smiley setValue={setP5} /> */}
                                     <Rating
@@ -351,7 +347,7 @@ export default function Survey() {
                                 </div>
                                 <div className="col-span-6 sm:col-span-6">
                                     <label id="email-label" htmlFor="email" className="block text-sm font-medium text-gray-600">
-                                        Sarana prasarana nyaman
+                                    Petugas Pelayanan Menerapkan Budaya Sopan
                                     </label>
                                     {/* <Smiley setValue={setP6} /> */}
                                     <Rating
@@ -366,7 +362,7 @@ export default function Survey() {
                                 </div>
                                 <div className="col-span-6 sm:col-span-6">
                                     <label id="email-label" htmlFor="email" className="block text-sm font-medium text-gray-600">
-                                        Petugas pelayanan merespon dengan baik
+                                    Petugas Pelayanan Menerapkan Budaya Santun
                                     </label>
                                     {/* <Smiley setValue={setP7} /> */}
                                     <Rating
@@ -379,57 +375,12 @@ export default function Survey() {
                                     />
                                     <p className="block text-sm font-medium" style={{ color: "red", display: showErrorMessage && p7 == 0 ? "flex" : "none" }}>Isian tidak boleh kosong</p>
                                 </div>
-                                <div className="col-span-6 sm:col-span-6">
-                                    <label id="email-label" htmlFor="email" className="block text-sm font-medium text-gray-600">
-                                        Keberadaan fasilitas pengaduan mudah diketahui
-                                    </label>
-                                    {/* <Smiley setValue={setP8} /> */}
-                                    <Rating
-                                        fillColorArray={startFillArray}
-                                        iconsCount={6}
-                                        showTooltip
-                                        tooltipArray={startTooltipArray}
-                                        transition
-                                        onClick={(val, val2)=>{setP8(val2+1);}}
-                                    />
-                                    <p className="block text-sm font-medium" style={{ color: "red", display: showErrorMessage && p8 == 0 ? "flex" : "none" }}>Isian tidak boleh kosong</p>
-                                </div>
-                                <div className="col-span-6 sm:col-span-6">
-                                    <label id="email-label" htmlFor="email" className="block text-sm font-medium text-gray-600">
-                                        Tidak ada diskriminasi pelayanan
-                                    </label>
-                                    {/* <Smiley setValue={setP9} /> */}
-                                    <Rating
-                                        fillColorArray={startFillArray}
-                                        iconsCount={6}
-                                        showTooltip
-                                        tooltipArray={startTooltipArray}
-                                        transition
-                                        onClick={(val, val2)=>{setP9(val2+1);}}
-                                    />
-                                    <p className="block text-sm font-medium" style={{ color: "red", display: showErrorMessage && p9 == 0 ? "flex" : "none" }}>Isian tidak boleh kosong</p>
-                                </div>
-                                <div className="col-span-6 sm:col-span-6">
-                                    <label id="email-label" htmlFor="email" className="block text-sm font-medium text-gray-600">
-                                        Tidak ada pungutan liar (pungli) dalam pelayanan
-                                    </label>
-                                    {/* <Smiley setValue={setP10} /> */}
-                                    <Rating
-                                        fillColorArray={startFillArray}
-                                        iconsCount={6}
-                                        showTooltip
-                                        tooltipArray={startTooltipArray}
-                                        transition
-                                        onClick={(val, val2)=>{setP10(val2+1);}}
-                                    />
-                                    <p className="block text-sm font-medium" style={{ color: "red", display: showErrorMessage && p10 == 0 ? "flex" : "none" }}>Isian tidak boleh kosong</p>
-                                </div>
-
+                                
                                 
 
                                 <div className="col-span-6 sm:col-span-6">
                                     <label id="email-label" htmlFor="email" className="block text-sm font-medium text-gray-600">
-                                        Saran terkait pelayanan secara keseluruhan (Opsional)
+                                        Saran terkait petugas pelayanan secara keseluruhan (Opsional)
                                     </label>
                                     <textarea rows={5} cols={40} style={{width: "100%", border: "1px solid black", padding:10}}
                                         placeholder="Isikan saran terkait pelayanan secara keseluruhan (Opsional)"
