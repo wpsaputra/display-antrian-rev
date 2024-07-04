@@ -13,6 +13,7 @@ import Tabel from './pages/Tabel';
 import { AnimatePresence, motion } from "framer-motion";
 import Motiondiv from './components/Motiondiv';
 import Sisera from './pages/Sisera';
+import SurveyOnline from './pages/SurveyOnline';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
             <Route path="/tabel" element={<Tabel />} />
             <Route path="/survey" element={<Motiondiv> <Survey /> </Motiondiv>} />
             <Route path="/sisera" element={<Motiondiv> <Sisera /> </Motiondiv>} />
+            <Route path="/survey-online/:slug" element={<Motiondiv> <SurveyOnline /> </Motiondiv>} />
 
           </Routes>
           {/* <Navbar/> */}
