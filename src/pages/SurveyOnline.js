@@ -107,7 +107,7 @@ function SurveyOnline() {
                                 <div className="mx-auto">
                                     {/* Headline */}
                                     <div className="font-sans text-gray-700 space-y-2 sm:leading-7 text-center antialiased">
-                                        <h1 id="title" className="text-3xl font-semibold">Survey Kepuasan Petugas Pelayanan</h1>
+                                        <h1 id="title" className="text-3xl font-semibold">Survey Kepuasan Pelayanan</h1>
                                         <p id="description" className="text-lg">BPS Provinsi Sulawesi Tenggara</p>
                                         <Rating style={{ display: "none" }} />
 
