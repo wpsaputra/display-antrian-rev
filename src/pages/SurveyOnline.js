@@ -1,5 +1,5 @@
 import { ArrowLeftIcon } from '@heroicons/react/outline';
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Rating } from 'react-simple-star-rating';
 import { url_api_view } from '../components/constant';
@@ -55,16 +55,29 @@ function SurveyOnline() {
     const navigate = useNavigate();
     const alert = useAlert();
 
+    const [saran, setSaran] = useState("");
+    const refSaran = useRef(null);
+
+    const isSaranError = () =>{
+        if ((p1 < 6) && saran=="" ) 
+        {
+            return true;
+        }
+        return false;
+
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
         console.log("handle submit");
         console.log(p1);
         setShowErrorMessage(true);
-        if(p1>0){
+        if(p1>0 && !isSaranError()){
             setIsLoading(true);
             const data = {
                 p1: p1,
-                niplama_petugas: matchingElement.id
+                niplama_petugas: matchingElement.id,
+                saran: refSaran.current.value
             }
             console.log("data", data);
             fetch(url_api_view + "/records/survey_online", {
@@ -138,6 +151,18 @@ function SurveyOnline() {
                                             />
                                             
                                             <p className="block text-sm font-medium" style={{ color: "red", display: showErrorMessage && p1 == 0 ? "flex" : "none" }}>Isian tidak boleh kosong</p>
+                                        </div>
+
+                                        <div className="col-span-6 sm:col-span-6" style={{marginTop:"10px"}}>
+                                            <label id="email-label" htmlFor="email" className="block text-sm font-medium text-gray-600">
+                                                Saran terkait petugas pelayanan {(matchingElement.fullname)}
+                                            </label>
+                                            <textarea rows={5} cols={40} style={{width: "100%", border: "1px solid black", padding:10}}
+                                                placeholder={"Isikan saran terkait pelayanan "+(matchingElement.fullname)}
+                                                ref={refSaran}
+                                                onChange={(e)=>{setSaran(e.target.value);}}
+                                            />
+                                            <p className="block text-sm font-medium" style={{ color: "red", display: showErrorMessage && isSaranError() ? "flex" : "none" }}>Ada layanan &lt; 6, mohon isikan saran perbaikan</p>
                                         </div>
 
                                         <div className="col-span-6 sm:col-span-2 mt-2">
